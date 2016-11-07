@@ -1,5 +1,6 @@
 package fi.jamk.deregi.exercise_25102016;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -12,9 +13,11 @@ import java.io.InputStream;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MyAdapter.OnItemClickListener{
 
     public RecyclerView myRecyclerView;
     public RecyclerView.Adapter mAdapter;
@@ -25,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         JSONArray golfArray = null;
         try{
@@ -48,8 +55,23 @@ public class MainActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         myRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new MyAdapter(mGolfCourses);
+        mAdapter = new MyAdapter(mGolfCourses, this);
         myRecyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void onItemClick(GolfCourses.GolfCourse golfCourse) {
+        Intent intent = new Intent(this, GolfDetailsActivity.class);
+        intent.putExtra("name", golfCourse.name);
+        intent.putExtra("picture", golfCourse.picture);
+        intent.putExtra("phone", golfCourse.phone);
+        intent.putExtra("address", golfCourse.address);
+        intent.putExtra("email", golfCourse.email);
+        intent.putExtra("description", golfCourse.description);
+        intent.putExtra("web", golfCourse.web);
+        intent.putExtra("lat", golfCourse.lat);
+        intent.putExtra("lng", golfCourse.lng);
+        startActivity(intent);
     }
 }
 

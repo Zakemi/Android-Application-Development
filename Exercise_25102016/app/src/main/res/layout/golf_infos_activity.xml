@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_weight="0.07">
+
+        <ImageView
+            android:layout_width="83dp"
+            android:layout_height="83dp"
+            app:srcCompat="@mipmap/ic_launcher"
+            android:id="@+id/infos_picture" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/infos_address" />
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/infos_phone" />
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/infos_email" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/infos_description"
+        android:layout_weight="0.05" />
+
+    <TextView
+        android:text="Click on the url to see the web page"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView7" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/infos_web"
+        android:layout_weight="0.04"
+        android:autoLink="all" />
+
+    <TextView
+        android:text="Click here to see on map"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/infos_location"
+        android:layout_weight="0.24" />
+
+</LinearLayout>

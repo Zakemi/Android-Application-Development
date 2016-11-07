@@ -19,10 +19,16 @@ import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
 
-    private GolfCourses golfCourses;
+    public interface OnItemClickListener {
+        void onItemClick(GolfCourses.GolfCourse golfCourse);
+    }
 
-    public MyAdapter(GolfCourses golfCourses){
+    private GolfCourses golfCourses;
+    private OnItemClickListener onItemClickListener;
+
+    public MyAdapter(GolfCourses golfCourses, OnItemClickListener listener){
         this.golfCourses = golfCourses;
+        this.onItemClickListener = listener;
     }
 
     @Override
@@ -33,7 +39,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        GolfCourses.GolfCourse golfCourse = golfCourses.golfCourses.get(position);
+        final GolfCourses.GolfCourse golfCourse = golfCourses.golfCourses.get(position);
         try {
             Field field = R.drawable.class.getField(golfCourse.picture.replace("kuvat/","").replace(".jpg", ""));
             int id = field.getInt(null);
@@ -47,13 +53,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
         holder.addressTextView.setText(golfCourse.address);
         holder.emailTextView.setText(golfCourse.email);
         holder.phoneTextView.setText(golfCourse.phone);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                onItemClickListener.onItemClick(golfCourse);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return golfCourses.golfCourses.size();
     }
-
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
